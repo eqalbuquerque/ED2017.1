@@ -1,0 +1,81 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.util.LinkedList;
+import java.util.StringTokenizer;
+
+
+// Link: https://drive.google.com/file/d/0B5pRfSlPtzIOdllFME5Vc3VCZTg/view
+// Exe spoj 3
+// Professor: Tiago Maritan
+//Aluno: Emanuel Queiroz de Albuquerque
+
+class Main {
+    public static void main(String[] args) throws Exception {
+
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
+        LinkedList<Elemento> elementos = new LinkedList<>();
+        LinkedList<Elemento> resultado = new LinkedList<>();
+        String string = bufferedReader.readLine();
+        long p1 = 0, p2 = 0;
+        while (string != null) {
+            if (string.isEmpty()) {
+                break;
+            }
+            elementos.add(new Elemento(string));
+            string = bufferedReader.readLine();
+        }
+
+        resultado.add(elementos.get(0));
+
+        for (int i = 0; i < elementos.size(); i++) {
+            for (int j = 1; j < elementos.size(); j++) {
+                if (resultado.get(i).getProximo() == elementos.get(j).getAtual()) {
+                    resultado.add(elementos.get(j));
+                }
+            }
+        }
+        int j = resultado.size() - 1;
+        for (int i = 0; i < resultado.size(); i++) {
+            p1 += resultado.get(i).getAnterior();
+            p1 += resultado.get(i).getAtual();
+            p1 += resultado.get(i).getProximo();
+            p2 += resultado.get(j).getProximo();
+            p2 += resultado.get(j).getAtual();
+            p2 += resultado.get(j).getAnterior();
+            j--;
+        }
+
+        if (p1 == p2) {
+            System.out.println("sana");
+        } else {
+            System.out.println("insana");
+        }
+    }
+}
+
+class Elemento {
+    private long atual;
+    private long anterior;
+    private long proximo;
+
+    public Elemento(String dados) {
+        StringTokenizer stringTokenizer = new StringTokenizer(dados, " ");
+        this.atual = new BigInteger(stringTokenizer.nextToken(), 16).longValue();
+        this.anterior = new BigInteger(stringTokenizer.nextToken(), 16).longValue();
+        this.proximo = new BigInteger(stringTokenizer.nextToken(), 16).longValue();
+    }
+
+    public long getAtual() {
+        return atual;
+    }
+
+    public long getAnterior() {
+        return anterior;
+    }
+
+    public long getProximo() {
+        return proximo;
+    }
+}
