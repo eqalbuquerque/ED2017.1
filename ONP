@@ -1,0 +1,99 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Stack;
+
+// Link: https://drive.google.com/file/d/0B5pRfSlPtzIOa1VMQndmUE5VUmc/view
+// Exe spoj 4
+// Professor: Tiago Maritan
+//Aluno: Emanuel Queiroz de Albuquerque
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        Stack<Character> stack = new Stack<>();
+        int size = Integer.parseInt(bufferedReader.readLine());
+        StringBuffer stringBuffer = new StringBuffer();
+
+        for (int i = 0; i < size; i+=1) {
+            String in = bufferedReader.readLine();
+            for (int j = 0; j < in.length(); j+=1) {
+                switch (in.charAt(j)) {
+                    case '(':
+                        stack.push(in.charAt(j));
+                        break;
+                    case ')':
+                        if (stack.peek() != '(') {
+                            stringBuffer.append(stack.pop());
+                            stack.pop();
+                            break;
+                        } else {
+                            stack.pop();
+                            break;
+                        }
+                    case '+':
+                        if (in.charAt(j + 1) == '(') {
+                            stack.push(in.charAt(j));
+                            break;
+
+                        } else {
+                            stringBuffer.append(in.charAt(j + 1));
+                            stringBuffer.append(in.charAt(j));
+                            j+=1;
+                            break;
+                        }
+                    case '-':
+                        if (in.charAt(j + 1) == '(') {
+                            stack.push(in.charAt(j));
+                            break;
+
+                        } else {
+                            stringBuffer.append(in.charAt(j + 1));
+                            stringBuffer.append(in.charAt(j));
+                            j+=1;
+                            break;
+                        }
+                    case '*':
+                        if (in.charAt(j + 1) == '(') {
+                            stack.push(in.charAt(j));
+                            break;
+
+                        } else {
+                            stringBuffer.append(in.charAt(j + 1));
+                            stringBuffer.append(in.charAt(j));
+                            j+=1;
+                            break;
+                        }
+                    case '/':
+                        if (in.charAt(j + 1) == '(') {
+                            stack.push(in.charAt(j));
+                            break;
+
+                        } else {
+                            stringBuffer.append(in.charAt(j + 1));
+                            stringBuffer.append(in.charAt(j));
+                            j+=1;
+                            break;
+                        }
+                    case '^':
+                        if (in.charAt(j + 1) == '(') {
+                            stack.push(in.charAt(j));
+                            break;
+
+                        } else {
+                            stringBuffer.append(in.charAt(j + 1));
+                            stringBuffer.append(in.charAt(j));
+                            j+=1;
+                            break;
+                        }
+                    default:
+                            stringBuffer.append(in.charAt(j));
+                            break;
+
+                }
+            }
+            System.out.println(stringBuffer.toString());
+            stringBuffer = new StringBuffer();
+        }
+    }
+}
