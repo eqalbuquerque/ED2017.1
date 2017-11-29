@@ -1,0 +1,55 @@
+#include <iostream>
+#include <cstdlib>
+
+//Emanuel Queiroz de Albuquerque 11409540
+//link imagem spoj
+//https://photos.google.com/photo/AF1QipNfNVIB_uihsJJDS8KkmacrYaH3tqFpq_dxFk3Y
+
+using namespace std;
+
+typedef struct node{ // tipo nó para árvore binária
+    int data;
+    node *left;
+    node *right;
+    }node_t;
+
+static int global_count = 0;
+
+void add_node(node_t **tree, int data){
+/*  ps: essa função é meio "casca de banana": o sistema pede para que o contador seja incrementado toda vez que a função roda, 
+    mas o que é considerado é quando acontece movimento para a esquerda ou direita */
+    if(*tree == NULL){
+        *tree = new node_t;
+        (*tree)->left = NULL;
+        (*tree)->right = NULL;
+        (*tree)->data = data;
+    }
+
+    if((*tree)->data > data){ //se o nó for menor, tenta adicionar na esquerda
+                global_count+=1;
+        add_node(&(*tree)->left, data);
+
+    }else if ((*tree)->data < data){ // se for maior, tenta adicionar na direita
+            global_count+=1;
+        add_node(&(*tree)->right, data);
+    }
+
+}
+
+int main(){
+    int qt; // quantidade de casos de teste
+    int test;
+    node_t * root = NULL;
+
+    cin>>qt;
+
+    while(qt--){
+            cin>>test;
+            add_node(&root, test);
+            cout<< global_count << endl;
+
+    }
+
+    return 0;
+
+}
