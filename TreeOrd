@@ -1,0 +1,41 @@
+#include <iostream>
+	#include <string>
+	#include <vector>
+	using namespace std;
+
+
+  //Emanuel Queiroz de Albuquerque 11409540
+  //link imagem spoj 
+  //https://photos.google.com/photo/AF1QipNLUDF7NGr5SI52gZ0ZO2puSWddPAg0QFNwHk4n
+  
+
+
+	int main(int argc, char const *argv[])
+	{
+		//inicializando os vetores pré, pós e inorder
+		vector<int> preorder, postorder,inorder;
+		int qt, temp;
+
+		//entradas de usuário
+		cin>>qt;
+		// adiciona as entradas nos seus devidos vetores
+		for(int i = 0; i < qt; i++){
+			cin>>temp;
+			preorder.push_back(temp);
+		}
+
+		for(int i = 0; i < qt; i++){
+			cin>>temp;
+			postorder.push_back(temp);
+		}
+
+		for(int i = 0; i < qt; i++){
+			cin>>temp;
+			inorder.push_back(temp);
+		}
+
+		if((preorder[0] == postorder[qt-1]) && (preorder[qt-1] == inorder[qt-1])){
+			cout << "yes" << endl; } else{ cout << "no" << endl;}
+
+		return 0;
+	}
