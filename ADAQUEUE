@@ -1,0 +1,103 @@
+#include <iostream>
+#include <string>
+#define MAX_SIZE 1000000 // tamanho maximo permitido
+
+using namespace std;
+
+
+//Emanuel Queiroz de Albuquerque
+//link imagem spoj 
+//https://photos.google.com/photo/AF1QipNLUDF7NGr5SI52gZ0ZO2puSWddPAg0QFNwHk4n
+
+int isEmpty(int f, int b){
+	if((f == -1)&&(b == -1)){return 1;}
+	else return 0;
+}
+
+
+int main()
+{
+	int adaqueue[MAX_SIZE];
+
+	
+	int front = -1;
+	int back = -1;
+
+	int is_reverse = 0; //flag para decidir para qual lado o array vai caminhar
+	int op;
+	cin>>op;
+
+	for(int i = 0; i < op; i++){
+		string func;
+		int dado;
+		cin>>func;
+
+		if(func == "front"){ //exibe o  primeiro elemento da queue
+			if(isEmpty(front,back)){
+				cout<< "No job for Ada?\n";
+			} else{ cout<<adaqueue[front]<<"\n"; //se vazio, reinicializa a queue
+                    if(front == back){
+                        front = -1;
+                        back = -1;
+                    }
+					else if(is_reverse){ //verifica a flag de reversao
+						   	   front = (front+MAX_SIZE-1)%MAX_SIZE; //caminha as posicoes num array circular
+						} else front = (front+MAX_SIZE+1)%MAX_SIZE;
+			}
+		}
+
+		else if(func == "back"){
+			if(isEmpty(front,back)){
+				cout<< "No job for Ada?\n";
+			} else{ cout<<adaqueue[back]<< "\n";
+                    if(front == back){
+                        front = -1;
+                        back = -1;
+                    }
+					else if(is_reverse){
+						   	   back = (back+MAX_SIZE+1)%MAX_SIZE;
+						} else back = (back+MAX_SIZE-1)%MAX_SIZE;
+			}}
+
+
+        else if(func == "toFront"){ //envia para o topo da queue
+                cin>>dado;
+                if(isEmpty(front,back)){
+                	front = 0;
+                	back = 0;
+                	adaqueue[0] = dado;
+                }else{
+					if(is_reverse){
+                                adaqueue[((front+MAX_SIZE+1)%MAX_SIZE)] = dado;
+                                front = ((front+MAX_SIZE+1)%MAX_SIZE);
+						} else{  adaqueue[(front+MAX_SIZE-1)%MAX_SIZE] = dado;
+                                front = (front+MAX_SIZE-1)%MAX_SIZE;
+        }}}
+
+        else if(func == "push_back"){ //envia para o final da queue
+         	   	cin>>dado;
+               	if(isEmpty(front,back)){
+                	front = 0;
+                	back = 0;
+                	adaqueue[0] = dado;
+                }else{
+					if(is_reverse){
+                                adaqueue[(back+MAX_SIZE-1)%MAX_SIZE] = dado;
+                                back = (back+MAX_SIZE-1)%MAX_SIZE;
+						} else { adaqueue[(back+MAX_SIZE+1)%MAX_SIZE] = dado;
+                                back = (back+MAX_SIZE+1)%MAX_SIZE;
+        }}}
+
+        else if(func == "reverse"){ //troca as posicoes de front e back e modifica a flag
+                	int temp = front;
+                	front = back;
+                	back = temp;
+                	if(is_reverse == 0){is_reverse = 1;}
+                		else is_reverse = 0;
+                }
+
+
+	}
+
+    	return 0;
+}
