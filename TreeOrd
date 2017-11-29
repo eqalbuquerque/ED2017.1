@@ -6,7 +6,7 @@
 
   //Emanuel Queiroz de Albuquerque 11409540
   //link imagem spoj 
-  //https://photos.google.com/photo/AF1QipNLUDF7NGr5SI52gZ0ZO2puSWddPAg0QFNwHk4n
+  //https://photos.google.com/photo/AF1QipMQ251GHxX98zmuuv_OS9nSbvJfaNaOHkziM1ce
   
 
 
@@ -18,7 +18,7 @@
 
 		//entradas de usuário
 		cin>>qt;
-		// adiciona as entradas nos seus devidos vetores
+	
 		for(int i = 0; i < qt; i++){
 			cin>>temp;
 			preorder.push_back(temp);
