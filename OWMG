@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+
+//Emanuel Queiroz de Albuquerque 11409540
+//link imagem spoj
+//https://photos.google.com/photo/AF1QipNDJHet3k1jaSpwNumwGhSoDXt8rKHiyQGE-ljB
+
+/*
+Esta solução pode ser obtida utilizando uma equação simples.
+com um pouco de observação, podemos gerar um teorema geral:
+a soma dos graus de todos os vértices no grafo é o dobro do número de cantos.
+os caminhos dos cantos possuem o 2 quadrados possiveis à colorir
+os caminhos adjacentes aos cantos possuem 3 quadrados possíveis a colorir.
+demais quadrinhos possuem 4 possíveis vizinhos à colorir
+colocando isso em uma equação: 
+4(x - 2)(y - 2) + 3*2*(x-2 + y-2)+2*4.
+simplificando:
+4(x-2)(y-2)+ 6x + 6y - 16
+4xy - 8x - 8y + 16 - 16
+4ab - 2a - 2b;
+que por fim dá em 2(xy-x-y)
+usando o método da simplificação
+ y(x - 1) + x(y - 1)
+*/
+int main() {
+    int qtde, a, b, res;
+    cin >> qtde;
+    while (qtde--) {
+       cin >> a >> b;
+       res =  (a - 1) * b;
+       res += (b - 1) * a;
+       cout << res << endl;
+    }
+    return 0;
+}
